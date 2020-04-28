@@ -1,6 +1,6 @@
 # CS31
- Fall Quarter 2019
- Taken with Professor Smallberg
+Fall Quarter 2019
+Taken with Professor Smallberg
 
 Scores| |
 |----|:---:|
