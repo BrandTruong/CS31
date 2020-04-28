@@ -1,0 +1,84 @@
+Obstacles
+
+Throughout this project, I faced many obstacles: some minute and others program-breaking. One major obstacles I faced was that my character variables were not set to have a maximum length, thus causing the stack around that variable to corrupt at random intervavls. I remedied this by setting all variables to a global int of 10000. Another such problem was that I was having signed/unisgned mismatch from using strlen alongside an initialized int value. This was fixed by creating an int variable to hold strlen as signed, or cassting it as int. Lastly, I struggled to get the code to declare the right amount of flowers and bees. I fixed this by replacing the input character at that value with ' ', which led to the equality operator always giving a fail. This in conjunction with the break allowed for the code to find the right amount of flowers and bees. A more minor issue was making the code more readable. I tried to fix this by using functions to separate parts of playOneRound.
+
+Pseudocode
+//success denoted by 0, failure denoted by 1
+
+define libraries and bypass error message
+set global constants
+declare functions used
+
+int checkInput...
+find length of user input
+if length is not between 4 and 6
+	return 1
+repeatedly through length of user input
+	check if character at value is lowercase letter
+		if not, return 1
+repeatedly through length of wordList
+	check if wordList contains user input
+if user input is not in wordList
+	return 1
+return 0
+
+int flowerAndBees...
+//mysteryWord is the given word, input is user input
+if mysteryWord and input are same
+	return 0
+repeatedly through length of mysteryWord
+	if characters at i in both match
+		flowers incremented
+		input character at i replaced with ' '
+	else, repeatedly through length of input
+		if any character in length matches character i in mysteryWord
+			bees incremented
+			input character at j replaced with ' '
+			break from loop
+print out resulting flowers and bees
+return 1
+
+int playOneRound...
+if nWords in wordList or wordnum less than 0, or wordnum greater than or equal to nWords
+	return -1
+	//should never run
+repeatedly ntil flowerAndBees return 0
+	prints Trial word:
+	cin user input
+	if function checkInput returns 0
+		if flowerAndBees returns 0
+			stops loop
+		else
+			numberOfRounds incremented
+	else
+		numberOfRounds incremented
+return numberOfRounds
+
+int main...
+initializes wordList and fills it, then returns nWords
+if nWords less than 1
+	print failure message
+	exit program with 1
+print how many rounds do you want to play?
+cin user input as int
+if input is negative
+	prints The number of rounds must be positive
+	exit program with 1
+repeatedly through amount of rounds
+	copies random array element in wordList to mysteryWord
+	prints round number and length of mysteryWord
+	store numberOfRounds given by playOneRound
+	prints numberOfRounds
+	if numberOfRounds equal to 1
+		print try
+	else
+		print tries
+	if first round
+		set minimum to numberOfRounds to first round
+	if numberOfRounds greater than max
+		set max to numberOfRounds
+	if numberOfRounds less than max
+		set min to numberOfRounds
+	calculates average as double, and set to 2 visible decimal points
+	prints average, minimum, and maximum
+	
