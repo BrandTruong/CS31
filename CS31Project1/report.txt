@@ -1,0 +1,34 @@
+Step 5
+
+Input 1: 
+By inputting 0 for the number of people surveyed and making both amount of people for and against impeachment greater than 0 (for example, 5 for impeachment and 10 against impeachment), we obtain inf% as our percentages for both. If we put 0 for the number of people surveyed and 0 for either people against or for impeachment, we will get -nan(ind)% as one of percentage. The code still gives us the correct result on whether more people support or oppose impeachment.
+Input 2:
+There is no code that defines when a tie occurs, hence when each of the percentages of people against and for impeachment are 50%, the code still outputs that more people oppose impeachment due to lines 32-33. This is because all results that are not forImpeachment > antiImpeachment fall into the else statement, even if the percentages are equal. An example would be out of 10 people surveyed, 5 support impeachment and 5 oppose impeachment. This results in the code saying that more people oppose impeachment even though they are equal.
+Input 3:
+The code allows for negative inputs, thus giving us a negative percentage when we give values such as -5 in any of the integer variables. If the number of people surveyed and either people for or against impeachment are negative, then the percentage becomes positive again due to double negative canceling out. An example would be putting -5 for the amount of people against impeachment and 10 for the number of people surveyed, giving us -50% as the percentage.
+Input 4:
+If the number of people surveyed is less than the sum of people against and for impeachment, the percentages do not add up to 100% anymore. This means that if we put 5 for the number of people surveyed, 3 for impeachment, and 4 against impeachment, we obtain 60% for impeachment and 80% against impeachment, which adds up to 140%.
+
+
+Step 6
+
+Error 1:
+In line 20, the decimal point is moved, giving us 10.00 instead of 100.0. This results in the percentage of people for impeachment being only 10% of what it should be (eg 5% instead of 50%).
+Error 2:
+In line 21, the percentage is multiplied by the number of people and divided by the amount of people against impeachment instead of the other way around ( divided by number of people, multipled by amount against impeachment.) This gives us an incorrect percentage that gives us a percentage greater than 100% (assuming that the input integers are correct.)
+Error 3:
+In lines 31-33, the statements are flipped, meaning that while the code still runs, the results are flipped. This means that even if more people oppose impeachment, the code will say that more people support impeachment.
+
+
+Step 7
+
+Error 1:
+In line 13, there is a missing semicolon at the end of the line, thus giving the error C2146: syntax error: missing ';' before identifier 'cin'
+Error 2:
+In line 18, the wrong input/output operator is used (<< instead of >>), thus causing cin to not input for antiImpeachment and giving the error C2678: binary '<<': no operator found which takes a left-hand operand of type 'std::istream' (or there is no acceptable conversion)
+Error 3:
+In line 20, the wrong operator is used, where the assignment operator (=) is instead replaced by the equality operator (==). This gives us the error C2143: syntax error: missing ';' before '==' since a double variable cannot be defined with the equality operator.
+Error 4:
+In line 27, there is a missing quotation mark ("), causing the string to be identified improperly as a bunch of undeclared identifiers. The ending quotation mark gives us a syntax error C2059: syntax error: 'string'.
+
+All these errors result in the code failing to compile properly
