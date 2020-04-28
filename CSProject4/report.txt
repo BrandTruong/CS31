@@ -1,0 +1,101 @@
+Obstacles
+Some obstacles I overcame included learning how to manipulate array elements without the use of array. By using for loops and nested loops, I was able to overcome this issue and iterate through the array and successfully organize it. Another such obstacle I faced was getting the motivation to do this project but somehow I was able to pull through. I also struggled to figure out at times if I should use i=0 or 1, n-1, and whatnot to iterate through the loop.
+
+Test Data (add cout<<[variable] to every one of them for better testing)
+
+Testing appendToAll
+---
+string people[5] = { "donald", "lindsey", "fiona", "rudy", "mick" };
+int j = appendToAll(people, 4, "^^^");
+Allows us to see if the command adds ^^^ to the end of every element up to n-1
+
+Testing lookup
+---
+string officeholders[5] = { "donald", "lindsey", "mike", "adam", "nancy" };
+int j = lookup(officeholders, 5, "gordan");
+Allows us to see if the command returns -1 since gordan is not in the array
+
+Testing positionOfMax
+---
+string persons[6] = { "donald", "lindsey", "marie", "rudy", "fiona", "adam" };
+int k = positionOfMax(persons, 6);
+Allows us to see if function finds greatest element
+
+Testing rotateLeft 
+---
+string politician[5] = { "mike", "donald", "lindsey", "nancy", "adam" };
+int m = rotateLeft(politician, 5, 1);
+Allows us to see if array is rotated based on a position given and n max number
+
+Testing countRuns
+---
+string d[9] = {"rudy", "adam", "mike", "mike", "fiona", "fiona", "fiona", "mike", "mike"};
+int p = countRuns(d, 9);
+Allows us to see if counts are done consecutively and doesn't wrongly count
+
+Testing flip
+---
+string folks[6] = { "adam", "fiona", "mike", "rudy", "nancy", "donald" };
+int q = flip(folks, 4);
+Allows us to see if the array if flipped from 0 to n
+
+Testing differ
+---
+string folks[7] = { "adam", "", "fiona", "mike", "rudy", "nancy", "donald" };
+string group[6] = { "adam", "", "fiona", "donald", "mike", "rudy" };
+int r = differ(folks, 7, group, 6);
+int s = differ(folks, 2, group, 3);
+Allows us to see if differ evaluates correctly
+
+Testing subsequence
+---
+string names[10] = { "gordon", "marie", "nancy", "mick", "gordon", "mick" };
+string names1[10] = { "marie", "nancy", "mick" };
+int t = subsequence(names, 6, names1, 3); 
+string names2[10] = { "gordon", "mick" };
+int u = subsequence(names, 5, names2, 2);
+Allows us to see if subsequence tests through the array properly and is able to find the next position if there are duplicate starting elements
+
+Testing lookupAny
+---
+string names[10] = { "gordon", "marie", "nancy", "mick", "adam", "lindsey" };
+string set1[10] = { "donald", "adam", "mick", "marie" };
+int v = lookupAny(names, 6, set1, 4);  
+string set2[10] = { "rudy", "fiona" };
+int w = lookupAny(names, 6, set2, 2);
+Allows us to see if lookupAny is ablle to find elements properly
+
+Testing separate
+---
+string persons[6] = { "donald", "lindsey", "marie", "rudy", "fiona", "adam" };
+int x = separate(persons, 6, "gordon");
+string persons2[4] = { "marie", "nancy", "lindsey", "mike" };
+int y = separate(persons2, 4, "mike");
+//Allows us to see if array is alphabeticalized and returns proper number
+
+Assert tests
+
+	string h[7] = { "mick", "marie", "fiona", "rudy", "", "gordon", "lindsey" };
+	assert(lookup(h, 7, "gordon") == 5);
+	assert(lookup(h, 7, "fiona") == 2);
+	assert(lookup(h, 2, "fiona") == -1);
+	assert(positionOfMax(h, 7) == 3);
+
+	string g[4] = { "mick", "marie", "lindsey", "nancy" };
+	assert(differ(h, 4, g, 4) == 2);
+	assert(appendToAll(g, 4, "?") == 4 && g[0] == "mick?" && g[3] == "nancy?");
+	assert(rotateLeft(g, 4, 1) == 1 && g[1] == "lindsey?" && g[3] == "marie?");
+
+	string e[4] = { "fiona", "rudy", "", "gordon" };
+	assert(subsequence(h, 7, e, 4) == 2);
+
+	string d[5] = { "marie", "marie", "marie", "rudy", "rudy" };
+	assert(countRuns(d, 5) == 2);
+	
+	string f[3] = { "lindsey", "fiona", "mike" };
+	assert(lookupAny(h, 7, f, 3) == 2);
+	assert(flip(f, 3) == 3 && f[0] == "mike" && f[2] == "lindsey");
+	
+	assert(separate(h, 7, "lindsey") == 3)
+	cout << "All tests succeeded" << endl;
+The assert test above runs through multiple commands of various strings, and prints out if all commands were valid. If not, then the main is aborted and there is nothing print out.
