@@ -1,0 +1,145 @@
+a. Obstacles
+
+One of the hardest obstacles I faced was checking for all the conditions, which required me to find out how to write specific arguments for each condition and continue with the string if the command is valid. After solving that, much of the difficulty in the project was solved. Some issues I had was making sure it read the number part of horiz and vert command properly. I also struggled to keep the code organized, which I tried alleviating with indentation and global functions.
+
+b. Design Description
+
+1. Declared functions plotLine, performCommands, as well as additional helping functions endpoints(to find endpoint) and convertToInt(converts string to int), as well as defining constant values.
+2. In main, sets the borders of the grid and gets a string input
+3. uses the string input in switch statement to either plot and draw commands, give syntax error, or out of boundary error
+4. Implements plotLine, which finds the endpoints first, then tests for 4 conditions:
+	The dir value is either HORIZ or VERT (i.e., either 0 or 1).
+	The fgbg value is either FG or BG (i.e., either 0 or 1).
+	Every position of the line to be plotted must be within the grid.
+	The plotChar must be a printable character
+    and returns false if invalid.
+5. If all conditions are valid, then it uses for loops with setChar to plot a line onto the grid
+6. performCommands is implemented, which first tests for conditions:
+	Invalid character where plotting command should be
+	Extra characters appear, such as a space between a plotting command letter H and its numeric argument.
+	Missing or extra arguments.
+	A numeric argument that does not have exactly one or two digits.
+	A non-printable character
+   and returns an integer for the switch case "syntax error message" if any of those are true.
+7. Also tests if line would go out of boundary and also returns an integer for case "invalid command" if it goes out of boundary
+8. If the string is valid, then it goes through a for loop to read each character, executing its plotting command through an if else if ... else statement:
+	Changes from fg to bg and vice versa, as well as plotChar.
+	Makes a horiz or vert line of distance x
+	Clears grid and resets variables
+9. Implements convertToInt and endpoints, which converts string to int and the latter finding the other endpoint.
+
+c. Test Data
+
+//Testing performCommand
+Enter a string:
+1. "H28V10H5V86" Tests whether the function returns 2 and gives error message "Cannot perform command at position 7" due to valid syntax but invalid position
+2.
+(a). "F#H+25H?V3!" 	Tests whether the function returns 1 and gives error message "Syntax error at position 4" due to invalid syntax
+(b). "F#H+25H?V3!" 	Similar to above, "Syntax error at position 4" leftmost syntax error
+(c). "B@H"        	"Syntax error at position 4"   expecting - or digit after H
+(d). "C12"         	"Syntax error at position 2"   C is one command; 1 can't start a command
+(e). "Q3V4#"      	"Syntax error at position 1"   Q can't start a command
+(f). "V03C H123#" 	"Syntax error at position 5"   " " can't start a command
+(g). "H18H-123#"   	"Syntax error at position 8"   H-12 is one command; 3 can't start a command
+(h). "H5H-1-2"     	"Syntax error at position 6"   H-1 is one command; - can't start a command
+(i). "FH8"         	"Syntax error at position 3"   FH is one command; 8 can't start a command
+
+1 and 2 does not plot anything onto the graph and only returns an error message
+
+3. "h12V3H-1B@v-3" is valid and plots properly, giving us:
+
+	          111111111122222222223
+	 123456789012345678901234567890
+	+------------------------------+
+       1|*************                 |
+       2|           @*                 |
+       3|           @*                 |
+       4|           **                 |
+       5|                              |
+       6|                              |
+       7|                              |
+       8|                              |
+       9|                              |
+      10|                              |
+      11|                              |
+      12|                              |
+      13|                              |
+      14|                              |
+      15|                              |
+      16|                              |
+      17|                              |
+      18|                              |
+      19|                              |
+      20|                              |
+	+------------------------------+
+If followed by "v2b h12fHh1fih0", we get:
+
+	          111111111122222222223
+	 123456789012345678901234567890
+	+------------------------------+
+       1|*************                 |
+       2|@          @*                 |
+       3|@          @Hi                |
+       4|           **                 |
+       5|                              |
+       6|                              |
+       7|                              |
+       8|                              |
+       9|                              |
+      10|                              |
+      11|                              |
+      12|                              |
+      13|                              |
+      14|                              |
+      15|                              |
+      16|                              |
+      17|                              |
+      18|                              |
+      19|                              |
+      20|                              |
+	+------------------------------+
+and if followed by "CV14", we get:
+
+
+	          111111111122222222223
+	 123456789012345678901234567890
+	+------------------------------+
+       1|*                             |
+       2|*                             |
+       3|*                             |
+       4|*                             |
+       5|*                             |
+       6|*                             |
+       7|*                             |
+       8|*                             |
+       9|*                             |
+      10|*                             |
+      11|*                             |
+      12|*                             |
+      13|*                             |
+      14|*                             |
+      15|*                             |
+      16|                              |
+      17|                              |
+      18|                              |
+      19|                              |
+      20|                              |
+	+------------------------------+
+This shows us that our functions work as intended
+
+//Testing plotLine
+1.	clearGrid();
+	if ( ! plotLine(14, 8, 3, HORIZ, '*', FG))   // first call
+	   cout << "1) Plotting failed when it shouldn't have!" << endl;
+	if ( ! plotLine(15, 10, -2, VERT, '@', FG))  // second call
+	   cout << "2) Plotting failed when it shouldn't have!" << endl;
+	if ( ! plotLine(13, 8, 3, HORIZ, '#', BG))   // third call
+	   cout << "3) Plotting failed when it shouldn't have!" << endl;
+	if (plotLine(13, 29, 3, HORIZ, 'X', FG))     // fourth call
+	   cout << "4) Plotting succeeded when it shouldn't have!" << endl;
+	draw();
+This test allows us to test the functionality of plotLine, showing that it satisfies the first three and reports that the fourth plotLine failed due to invalid position.
+
+There's probably more test data but I don't know what else to write so that's all for test data. Using  
+curl -s -L http://cs.ucla.edu/classes/fall19/cs31/Utilities/p3tester | bash 
+shows that it satisfies all 5 tests
