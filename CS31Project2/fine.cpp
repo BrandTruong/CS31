@@ -1,7 +1,7 @@
 /* fine.cpp : This file contains the 'main' function. Program execution begins and ends there.
 CS31 Project 2 by Brandon Truong
 10/12/19
-705326387
+
 */
 
 #include <iostream> //includes source file

@@ -1,6 +1,6 @@
 Homework 10/12/19
 Brandon Truong
-705326387
+
 
 1. The output is:
 
